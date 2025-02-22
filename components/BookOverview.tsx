@@ -1,5 +1,6 @@
 import React from "react";
 import Image from "next/image";
+import BookCover from "./BookCover";
 // import BookCover from "@/components/BookCover";
 // import BorrowBook from "@/components/BorrowBook";
 ;
@@ -73,7 +74,7 @@ const BookOverview = async ({
                     />
                 )} */}
             </div>
-            {/* 
+
             <div className="relative flex flex-1 justify-center">
                 <div className="relative">
                     <BookCover
@@ -91,7 +92,7 @@ const BookOverview = async ({
                         />
                     </div>
                 </div>
-            </div> */}
+            </div>
         </section>
     );
 };

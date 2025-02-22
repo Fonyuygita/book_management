@@ -18,8 +18,9 @@ const Home = async () => {
 
   return (
     <>
+      {/* @ts-ignore */}
 
-      {/* <BookOverview {...sampleBooks}  /> */}
+      <BookOverview {...sampleBooks[0]} />
 
       {/* <BookList
         title="Latest Books"
