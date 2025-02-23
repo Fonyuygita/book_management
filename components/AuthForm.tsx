@@ -26,6 +26,7 @@ import { FIELD_NAMES, FIELD_TYPES } from "@/constants";
 // import FileUpload from "@/components/FileUpload";
 // import { toast } from "@/hooks/use-toast";
 import { useRouter } from "next/navigation";
+import ImageUpload from "./ImageUpload";
 
 interface Props<T extends FieldValues> {
     schema: ZodType<T>;
@@ -50,7 +51,8 @@ const AuthForm = <T extends FieldValues>({
     });
 
     const handleSubmit: SubmitHandler<T> = async (data) => {
-        const result = await onSubmit(data);
+        // const result = await onSubmit(data);
+        console.log(data)
 
         // if (result.success) {
         //     toast({
@@ -97,15 +99,11 @@ const AuthForm = <T extends FieldValues>({
                                     </FormLabel>
                                     <FormControl>
                                         {field.name === "universityCard" ? (
-                                            // <FileUpload
-                                            //     type="image"
-                                            //     accept="image/*"
-                                            //     placeholder="Upload your ID"
-                                            //     folder="ids"
-                                            //     variant="dark"
-                                            //     onFileChange={field.onChange}
-                                            // />
-                                            <h1>Hello World</h1>
+                                            <ImageUpload
+
+                                                onFileChange={field.onChange}
+                                            />
+
                                         ) : (
                                             <Input
                                                 // required
