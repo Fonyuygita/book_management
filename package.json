@@ -6,7 +6,10 @@
     "dev": "next dev --turbopack",
     "build": "next build",
     "start": "next start",
-    "lint": "next lint"
+    "lint": "next lint",
+    "db:generate": "npx drizzle-kit migrate",
+    "db:migrate": "npx drizzle-kit migrate",
+    "db:studio": "npx drizzle-kit studio"
   },
   "dependencies": {
     "@hookform/resolvers": "^4.1.1",
@@ -15,6 +18,7 @@
     "@radix-ui/react-slot": "^1.1.2",
     "class-variance-authority": "^0.7.1",
     "clsx": "^2.1.1",
+    "dotenv": "^16.4.7",
     "drizzle-orm": "^0.39.3",
     "imagekit": "^6.0.0",
     "imagekitio-next": "^1.0.1",
