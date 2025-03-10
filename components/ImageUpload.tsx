@@ -25,7 +25,9 @@ const authenticator = async () => {
         }
 
         const data = await response.json();
-        const { signature, expire, token } = data
+        console.log(data, "This is data");
+        // const { signature, expire, token } = data
+        return data
 
     } catch (err) {
         console.log('Error occurred while processing image');
@@ -36,12 +38,14 @@ const ImageUpload = ({ onFileChange }: { onFileChange: (filePath: string) => voi
     // state to keep track of file uploading
     const [file, setFile] = useState<{ filePath: string } | null>(null)
     const onError = (error: any) => {
-        console.log(error);
+        console.log(error, "Error occured");
 
-        toast(`Your could not be uploaded. Please try again.`);
+        toast(`Your image could not be uploaded. Please try again ${error}.`);
+        console.log(`error occured here ${error}`);
     };
 
     const onSuccess = (res: any) => {
+        console.log(res, "this is the res");
         setFile(res);
         onFileChange(res.filePath);
 
@@ -49,7 +53,7 @@ const ImageUpload = ({ onFileChange }: { onFileChange: (filePath: string) => voi
     };
 
 
-
+    console.log("File is", file);
     return (
         <ImageKitProvider
             publicKey={publicKey}
@@ -91,6 +95,18 @@ const ImageUpload = ({ onFileChange }: { onFileChange: (filePath: string) => voi
                     <p className={cn("upload-filename")}>loading...</p>
                 )}
             </button>
+
+            {
+                file && (
+                    <IKImage
+                        alt={file.filePath}
+                        path={file.filePath}
+                        width={500}
+                        height={500}
+
+                    />
+                )
+            }
 
 
         </ImageKitProvider>

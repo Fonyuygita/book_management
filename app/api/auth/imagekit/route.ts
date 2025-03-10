@@ -1,6 +1,7 @@
 import config from "@/config";
 import ImageKit from "imagekit";
 import { NextResponse } from "next/server";
+console.log("hello world");
 
 // destructure the env
 const {
@@ -9,9 +10,9 @@ const {
   },
 } = config;
 const imagekit = new ImageKit({
-  publicKey: publicKey,
-  privateKey: privateKey,
-  urlEndpoint: urlEndpoint,
+  publicKey,
+  privateKey,
+  urlEndpoint,
 });
 
 export async function GET() {
