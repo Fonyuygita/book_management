@@ -17,9 +17,9 @@ const Page = () => (
             universityId: 0,
             universityCard: "",
         }}
-    // @ts-ignore
+        // @ts-ignore
 
-    // onSubmit={signUp}
+        onSubmit={signUp}
     />
 );
 
