@@ -58,6 +58,7 @@ const AuthForm = <T extends FieldValues>({
         if (result.success) {
 
             toast(`SignIn successful........`);
+            console.log("Data is", data)
 
 
             router.push("/");

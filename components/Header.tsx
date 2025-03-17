@@ -2,8 +2,13 @@ import Link from "next/link";
 import Image from "next/image";
 // import { signOut } from "@/auth";
 import { Button } from "@/components/ui/button";
+import { Session } from "next-auth";
+import { AvatarFallback } from "@radix-ui/react-avatar";
+import { Avatar } from "./ui/avatar";
+import { getInitials } from "@/lib/utils";
 
-const Header = () => {
+const Header = ({ session }: { session: Session }) => {
+    console.log(session)
     return (
         <header className="my-10 flex justify-between gap-5">
             <Link href="/">
@@ -19,6 +24,15 @@ const Header = () => {
                         <Button>Logout</Button>
                     </form>
                 </li>
+
+                <li>
+                    <Link href="profile">
+                        <Avatar>
+                            <AvatarFallback className="text-white ">{getInitials(session?.user?.name || "SB")}</AvatarFallback>
+                        </Avatar>
+
+                    </Link>
+                </li >
             </ul>
         </header>
     );

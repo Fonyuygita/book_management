@@ -1,36 +1,52 @@
 "use server";
 
-import { signIn } from "@/auth";
+import { eq } from "drizzle-orm";
 import { db } from "@/database/drizzle";
 import { users } from "@/database/schema";
 import { hash } from "bcryptjs";
-import { error } from "console";
-import { eq } from "drizzle-orm";
+import { signIn } from "@/auth";
+import { headers } from "next/headers";
+// import ratelimit from "@/lib/ratelimit";
+import { redirect } from "next/navigation";
+// import { workflowClient } from "@/lib/workflow";
+// import config from "@/lib/config";
 
 export const signInWithCredentials = async (
   params: Pick<AuthCredentials, "email" | "password">
 ) => {
   const { email, password } = params;
+  console.log("This function is running________");
+
+  // const ip = (await headers()).get("x-forwarded-for") || "127.0.0.1";
+  // const { success } = await ratelimit.limit(ip);
+
+  // if (!success) return redirect("/too-fast");
+
   try {
     const result = await signIn("credentials", {
       email,
       password,
       redirect: false,
     });
+
     if (result?.error) {
       return { success: false, error: result.error };
     }
 
     return { success: true };
-  } catch (err) {
-    console.log(err, "Error SigningUp");
-    return { sucess: false, error: "Signup error" };
+  } catch (error) {
+    console.log(error, "Signin error");
+    return { success: false, error: "Signin error" };
   }
 };
 
 export const signUp = async (params: AuthCredentials) => {
   const { fullName, email, universityId, password, universityCard } = params;
-  // check if user already exist
+
+  // const ip = (await headers()).get("x-forwarded-for") || "127.0.0.1";
+  // const { success } = await ratelimit.limit(ip);
+
+  // if (!success) return redirect("/too-fast");
 
   const existingUser = await db
     .select()
@@ -39,13 +55,12 @@ export const signUp = async (params: AuthCredentials) => {
     .limit(1);
 
   if (existingUser.length > 0) {
-    return { success: false, error: "User already exist" };
+    return { success: false, error: "User already exists" };
   }
 
-  // now we hash the password
-  const hashedPassword = await hash(password, 20);
+  const hashedPassword = await hash(password, 10);
+
   try {
-    // we can try to create a new user in the try
     await db.insert(users).values({
       fullName,
       email,
@@ -54,11 +69,19 @@ export const signUp = async (params: AuthCredentials) => {
       universityCard,
     });
 
-    // upon Registration, we can automatically sign in on behalf of the new user so they don't provide their credentials on the signIn screen
-    // await signInWithCredentials({email, password})
+    // await workflowClient.trigger({
+    //   url: `${config.env.prodApiEndpoint}/api/workflows/onboarding`,
+    //   body: {
+    //     email,
+    //     fullName,
+    //   },
+    // });
+
+    await signInWithCredentials({ email, password });
+
     return { success: true };
-  } catch (err) {
-    console.log(err, "Error SigningUp");
-    return { sucess: false, error: "Signup error" };
+  } catch (error) {
+    console.log(error, "Signup error");
+    return { success: false, error: "Signup error" };
   }
 };

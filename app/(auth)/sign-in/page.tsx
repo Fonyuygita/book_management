@@ -3,9 +3,9 @@
 import React from "react";
 import AuthForm from "@/components/AuthForm";
 import { signInSchema } from "@/lib/validation";
-import { signInWithCredentials } from "@/lib/actions/auth";
-// import { signInSchema } from "@/lib/validations";
 // import { signInWithCredentials } from "@/lib/actions/auth";
+// import { signInSchema } from "@/lib/validations";
+import { signInWithCredentials } from "@/lib/actions/auth";
 
 const Page = () => (
     <AuthForm
@@ -15,8 +15,8 @@ const Page = () => (
             email: "",
             password: "",
         }}
-    // @ts-ignore
-    // onSubmit={signInWithCredentials}
+        // @ts-ignore
+        onSubmit={signInWithCredentials}
     />
 );
 
