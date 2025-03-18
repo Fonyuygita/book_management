@@ -6,8 +6,9 @@ import { users } from "@/database/schema";
 import { hash } from "bcryptjs";
 import { signIn } from "@/auth";
 import { headers } from "next/headers";
-// import ratelimit from "@/lib/ratelimit";
+
 import { redirect } from "next/navigation";
+import ratelimit from "../rateLimit";
 // import { workflowClient } from "@/lib/workflow";
 // import config from "@/lib/config";
 
@@ -17,10 +18,10 @@ export const signInWithCredentials = async (
   const { email, password } = params;
   console.log("This function is running________");
 
-  // const ip = (await headers()).get("x-forwarded-for") || "127.0.0.1";
-  // const { success } = await ratelimit.limit(ip);
+  const ip = (await headers()).get("x-forwarded-for") || "127.0.0.1";
+  const { success } = await ratelimit.limit(ip);
 
-  // if (!success) return redirect("/too-fast");
+  if (!success) return redirect("/too-fast");
 
   try {
     const result = await signIn("credentials", {
@@ -43,10 +44,10 @@ export const signInWithCredentials = async (
 export const signUp = async (params: AuthCredentials) => {
   const { fullName, email, universityId, password, universityCard } = params;
 
-  // const ip = (await headers()).get("x-forwarded-for") || "127.0.0.1";
-  // const { success } = await ratelimit.limit(ip);
+  const ip = (await headers()).get("x-forwarded-for") || "127.0.0.1";
+  const { success } = await ratelimit.limit(ip);
 
-  // if (!success) return redirect("/too-fast");
+  if (!success) return redirect("/too-fast");
 
   const existingUser = await db
     .select()

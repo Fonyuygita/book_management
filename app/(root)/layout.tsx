@@ -7,7 +7,7 @@ const layout = async ({ children }: { children: ReactNode }) => {
     console.log(session)
     return (
         <main className='root-container'>
-            <div className="mx-auto max-w-7xl">
+            <div className="mx-auto w-full max-w-7xl">
                 <Header session={session} />
             </div>
             {children}
