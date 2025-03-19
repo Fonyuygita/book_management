@@ -8,6 +8,7 @@ const layout = async ({ children }: { children: ReactNode }) => {
     return (
         <main className='root-container'>
             <div className="mx-auto w-full max-w-7xl">
+                {/* @ts-ignore */}
                 <Header session={session} />
             </div>
             {children}
