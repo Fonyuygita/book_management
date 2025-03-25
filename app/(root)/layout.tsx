@@ -13,16 +13,18 @@ const layout = async ({ children }: { children: ReactNode }) => {
 
     // we only want to check the users last visit only when user is signiN, THIS IS TO SEE LAST TIME User was logged in
 
-    // get the user and see if last activity is today
-    const user = await db.select().from(users).where(eq(users.id, session?.user?.id)).limit(1)
-    if (user[0].lastActivityDate === new Date().toISOString().slice(0, 10)) return
+    //    AFTER USER SIGN IN
     after(async () => {
         if (!session?.user?.id) return
+
+        const user = await db.select().from(users).where(eq(users.id, session?.user?.id)).limit(1)
+        if (user[0].lastActivityDate === new Date().toISOString().slice(0, 10)) return
         // if user do exist,  we want to update our database
         // take the year, month and day without the time 
+        // keep updating to know when the user was last active-> you cxan use useEffect or avoid uisng it in the client side
         await db.update(users).set({ lastActivityDate: new Date().toISOString().slice(0, 10) }).where(eq(users.id, session?.user?.id))
     })
-
+    // NOW GO TO OUR ONBOARDING API KEY AND ADD CONDITIONS FOR SENDING EMAILS ACCORDING TO THE CONDITIONS ABOVE
     console.log(session)
     return (
         <main className='root-container'>
