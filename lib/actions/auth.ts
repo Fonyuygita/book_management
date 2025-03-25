@@ -9,6 +9,8 @@ import { headers } from "next/headers";
 
 import { redirect } from "next/navigation";
 import ratelimit from "../rateLimit";
+import { workflowClient } from "../workflow";
+import config from "@/config";
 // import { workflowClient } from "@/lib/workflow";
 // import config from "@/lib/config";
 
@@ -70,13 +72,15 @@ export const signUp = async (params: AuthCredentials) => {
       universityCard,
     });
 
-    // await workflowClient.trigger({
-    //   url: `${config.env.prodApiEndpoint}/api/workflows/onboarding`,
-    //   body: {
-    //     email,
-    //     fullName,
-    //   },
-    // });
+    // TRIGGER WORK FLOW TO SEND EMAIL AFTER SIGN UP
+
+    await workflowClient.trigger({
+      url: `${config.env.prodApiEndpoint}/api/workflows/onboarding`,
+      body: {
+        email,
+        fullName,
+      },
+    });
 
     await signInWithCredentials({ email, password });
 
