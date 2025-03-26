@@ -8,7 +8,7 @@ import Header from "@/components/admin/Header";
 import { db } from "@/database/drizzle";
 import { users } from "@/database/schema";
 import { eq } from "drizzle-orm";
-// import { Toaster } from "@/components/ui/toaster"
+import { Toaster } from "@/components/ui/toaster"
 
 const Layout = async ({ children }: { children: ReactNode }) => {
     const session = await auth();
@@ -32,7 +32,7 @@ const Layout = async ({ children }: { children: ReactNode }) => {
                 <Header session={session} />
                 {children}
             </div>
-            {/* <Toaster /> */}
+            <Toaster />
         </main>
     );
 };
