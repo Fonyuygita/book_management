@@ -20,7 +20,7 @@ const Home = async () => {
     <>
       {/* @ts-ignore */}
 
-      <BookOverview {...sampleBooks[0]} />
+      <BookOverview {...latestBooks[0]} userId={session?.user?.id}  />
 
       {/* <BookList
         title="Latest Books"

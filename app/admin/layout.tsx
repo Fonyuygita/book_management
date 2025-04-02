@@ -22,7 +22,7 @@ const Layout = async ({ children }: { children: ReactNode }) => {
         .limit(1)
         .then((res) => res[0]?.isAdmin === "ADMIN");
 
-    // if (!isAdmin) redirect("/");
+    if (!isAdmin) redirect("/"); 
 
     return (
         <main className="flex min-h-screen w-full flex-row">

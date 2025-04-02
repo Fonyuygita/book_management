@@ -55,3 +55,44 @@ const stringPair: KeyValuePair<string, boolean> = {
   value: true,
 };
 const numberPair2: KeyValuePair<string, string> = { key: "hello", value: "hi" };
+
+
+
+
+
+
+
+
+// import React from "react";
+
+// interface ListProps<T> {
+//     items: T[];
+//     renderItem: (item: T) => React.ReactNode;
+// }
+
+// function List<T>({ items, renderItem }: ListProps<T>) {
+//     return (
+//         <ul>
+//             {items.map((item, index) => (
+//                 <li key={index}>{renderItem(item)}</li>
+//             ))}
+//         </ul>
+//  
+//    );
+// }
+
+// // Usage
+// const numbers = [1, 2, 3, 4];
+// const fruits = ["Apple", "Banana", "Cherry"];
+
+// export default function App() {
+//     return (
+//         <div>
+//             <h2>Numbers</h2>
+//             <List items={numbers} renderItem={(num) => <span>{num}</span>} />
+
+//             <h2>Fruits</h2>
+//             <List items={fruits} renderItem={(fruit) => <strong>{fruit}</strong>} />
+//         </div>
+//     );
+// }
