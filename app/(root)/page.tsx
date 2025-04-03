@@ -18,15 +18,15 @@ const Home = async () => {
 
   return (
     <>
-      {/* @ts-ignore */}
 
-      <BookOverview {...latestBooks[0]} userId={session?.user?.id}  />
 
-      {/* <BookList
+      <BookOverview {...latestBooks[0]} userId={session?.user?.id} />
+
+      <BookList
         title="Latest Books"
         books={latestBooks.slice(1)}
         containerClassName="mt-28"
-      /> */}
+      />
     </>
   );
 };

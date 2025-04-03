@@ -18,7 +18,7 @@ const BookOverview = async ({
     coverColor,
     coverUrl,
     id,
-    // userId,
+    userId,
 }: Book) => {
     // const [user] = await db
     //     .select()
